@@ -70,7 +70,9 @@ export default function QA() {
               <AccordionContent className="text-stone-700">
                 <ul className="list-disc pl-5 space-y-2">
                   {faq.answers.map((answer, answerIndex) => (
-                    <li key={answerIndex}>{answer}</li>
+                    <li key={answerIndex} className="text-stone-700">
+                      {answer}
+                    </li>
                   ))}
                 </ul>
               </AccordionContent>
