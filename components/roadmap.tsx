@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Flame, Star, Rocket } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Flame, Star, Rocket } from "lucide-react";
 
 export default function Roadmap() {
   const roadmapData = [
@@ -35,14 +35,13 @@ export default function Roadmap() {
         "Specific social currency coin-issuing protocols on multiple chains",
       ],
     },
-  ]
+  ];
 
   return (
     <section id="roadmap" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
-            <Flame className="w-8 h-8 text-orange-500 mr-3" />
             <h2
               className="text-3xl md:text-4xl font-bold text-stone-800"
               style={{ fontFamily: "Montserrat, sans-serif" }}
@@ -61,7 +60,9 @@ export default function Roadmap() {
               <CardHeader>
                 <div className="flex items-center mb-2">
                   <div className="text-orange-600 mr-3">{phase.icon}</div>
-                  <CardTitle className="text-xl font-bold text-stone-800">{phase.quarter}</CardTitle>
+                  <CardTitle className="text-xl font-bold text-stone-800">
+                    {phase.quarter}
+                  </CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -79,5 +80,5 @@ export default function Roadmap() {
         </div>
       </div>
     </section>
-  )
+  );
 }
