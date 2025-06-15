@@ -9,28 +9,38 @@ export default function QA() {
   const faqData = [
     {
       question: "What is OnlyCast?",
-      answer:
-        "OnlyCast is an application that helps users monetize their digital assets through social tokens. It's an experiment in creating a SocialFi platform where creators can build meaningful connections with their audience while generating revenue from their content and community.",
+      answers: [
+        "OnlyCast is an application that helps users monetize their digital assets through social currencies, including: content, social connections, events, and service skills, etc. Our current social connections are based on the farcaster protocol.",
+      ],
     },
     {
       question: "How does OnlyCast work?",
-      answer:
-        "OnlyCast leverages Farcaster's social connections to create a seamless experience for creators and fans. Creators can mint their own social tokens, publish exclusive content, and offer personalized services to their token holders. The platform integrates with various blockchain protocols to ensure secure and transparent transactions.",
+      answers: [
+        `OnlyCast leverages farcaster's social connections and issues its own social tokens for each user by virtue of the clanker coin-issuing protocol. Users can create content, exchange social influence (followers, likes, etc.), and provide service skills to appreciate their own currencies, thus generating organic and win-win benefits.`,
+        `Content data created by creators is stored in Arweave, and other users need to hold a certain amount of creator tokens to view the creator's content. For other features, value needs to be exchanged between the creator and the user in the creator's currency.`,
+      ],
     },
     {
-      question: "What makes OnlyCast different?",
-      answer:
-        "OnlyCast focuses on genuine creator-fan relationships rather than speculative trading. Our platform emphasizes content quality, community building, and sustainable monetization models that benefit both creators and their supporters.",
+      question: "What features does OnlyCast have?",
+      answers: [
+        "OnlyCast will eventually support the full range of social currency features, and is currently iterating on the creator content side of the feature development, you can follow Roadmap or communicate directly with the team for other features and specific release dates.",
+      ],
     },
     {
-      question: "How can I get started?",
-      answer:
-        "You can start by visiting our app at onlycast.fun and connecting your wallet. From there, you can explore existing creators, purchase social tokens, or begin your journey as a creator by minting your own token.",
+      question: "How do users benefit from OnlyCast?",
+      answers: [
+        `We issue coins for users based on clanker, and the user's revenue model is completely based on clanker's protocol; a. For each transaction of the user's token, the user gets 7% of the transaction's commission, clanker's protocol gets 2% of the transaction's commission, and OnlyCast gets 1/1000 of the transaction's commission.`,
+
+        `When creating a token, you can choose to hold a position and lock a certain amount of your own currency, such as holding a position of 10% and locking the position for 30 days. At this time the position is 0 cost.`,
+
+        `The price of any token fluctuates, you can buy a certain amount of your own tokens when the price is low. Creators buying their own code will also increase the trust of the token and give other holders more confidence in the token.`,
+      ],
     },
     {
-      question: "What blockchain networks do you support?",
-      answer:
-        "Currently, we support Ethereum mainnet with plans to expand to Solana and BSC in Q4 2024. This multi-chain approach will provide users with more options and lower transaction costs.",
+      question: "How do I withdraw my own FEE?",
+      answers: [
+        ` Token creators can claim their rewards through the admin page of their tokens on clanker.world, it is important to note that you need to use the wallet where you created the token to claim it, if you are using the Farcaster wallet, you need to use that wallet mnemonic on the clanker page is to restore the wallet with that mnemonic after Withdraw their own fee rewards.`,
+      ],
     },
   ];
 
@@ -57,7 +67,11 @@ export default function QA() {
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-stone-700">
-                {faq.answer}
+                <ul className="list-disc pl-5 space-y-2">
+                  {faq.answers.map((answer, answerIndex) => (
+                    <li key={answerIndex}>{answer}</li>
+                  ))}
+                </ul>
               </AccordionContent>
             </AccordionItem>
           ))}

@@ -1,13 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Copy, Check, Calendar } from "lucide-react";
+import { Copy, Check, Clock } from "lucide-react";
 import { TOKEN_INFO } from "@/lib/constants";
 
 export default function Tokenomics() {
   const [copiedAddress, setCopiedAddress] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const unlockDate = new Date(TOKEN_INFO.unlockDate).getTime();
+      const now = new Date().getTime();
+      const difference = unlockDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          ),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const copyAddress = async () => {
     try {
@@ -19,40 +51,46 @@ export default function Tokenomics() {
     }
   };
 
+  const isUnlocked =
+    timeLeft.days === 0 &&
+    timeLeft.hours === 0 &&
+    timeLeft.minutes === 0 &&
+    timeLeft.seconds === 0;
+
   return (
-    <section id="tokenomics" className="py-20 bg-orange-50">
+    <section id="tokenomics" className="py-12 md:py-20 bg-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2
-            className="text-3xl md:text-4xl font-bold text-stone-800 mb-4"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-stone-800 mb-4"
             style={{ fontFamily: "Montserrat, sans-serif" }}
           >
             Tokenomics
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Contract Address & Unlock Schedule */}
           <Card className="bg-white border-orange-200 hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
+            <CardHeader className="pb-4">
               <CardTitle className="text-lg font-semibold text-stone-800">
                 Contract & Unlock
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 md:space-y-6">
               <div>
                 <h4 className="text-sm font-medium text-stone-600 mb-2">
                   Contract Address
                 </h4>
-                <div className="flex items-center justify-between bg-orange-50 p-3 rounded-lg">
-                  <span className="text-sm text-stone-600 font-mono truncate pr-2 flex-1">
+                <div className="flex items-center justify-between bg-orange-50 p-3 rounded-lg min-h-[44px]">
+                  <span className="text-xs sm:text-sm text-stone-600 font-mono truncate pr-2 flex-1 leading-relaxed">
                     {TOKEN_INFO.contractAddress}
                   </span>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={copyAddress}
-                    className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 flex-shrink-0"
+                    className="text-orange-600 hover:text-orange-700 hover:bg-orange-100 flex-shrink-0 min-w-[44px] h-[44px]"
                   >
                     {copiedAddress ? (
                       <Check className="w-4 h-4" />
@@ -64,15 +102,53 @@ export default function Tokenomics() {
               </div>
               <div>
                 <h4 className="text-sm font-medium text-stone-600 mb-2">
-                  Unlock Schedule
+                  Unlock Countdown
                 </h4>
-                <div className="flex items-center justify-center bg-orange-50 p-4 rounded-lg">
-                  <div className="text-center">
-                    <Calendar className="w-8 h-8 text-orange-500 mx-auto mb-2" />
-                    <p className="text-lg font-semibold text-stone-800">
-                      {TOKEN_INFO.unlockDate}
+                <div className="bg-orange-50 p-3 md:p-4 rounded-lg">
+                  <div className="flex items-center justify-center mb-3">
+                    <Clock className="w-5 h-5 md:w-6 md:h-6 text-orange-500 mr-2" />
+                    <p className="text-xs md:text-sm text-stone-600">
+                      Time until unlock
                     </p>
-                    <p className="text-xs text-stone-600">Token Unlock Date</p>
+                  </div>
+                  {isUnlocked ? (
+                    <div className="text-center">
+                      <p className="text-base md:text-lg font-bold text-green-600">
+                        🎉 Tokens Unlocked!
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                      <div className="bg-white rounded-lg p-2 md:p-3">
+                        <div className="text-base md:text-lg font-bold text-orange-600">
+                          {timeLeft.days}
+                        </div>
+                        <div className="text-xs text-stone-500">Days</div>
+                      </div>
+                      <div className="bg-white rounded-lg p-2 md:p-3">
+                        <div className="text-base md:text-lg font-bold text-orange-600">
+                          {timeLeft.hours}
+                        </div>
+                        <div className="text-xs text-stone-500">Hours</div>
+                      </div>
+                      <div className="bg-white rounded-lg p-2 md:p-3">
+                        <div className="text-base md:text-lg font-bold text-orange-600">
+                          {timeLeft.minutes}
+                        </div>
+                        <div className="text-xs text-stone-500">Minutes</div>
+                      </div>
+                      <div className="bg-white rounded-lg p-2 md:p-3">
+                        <div className="text-base md:text-lg font-bold text-orange-600">
+                          {timeLeft.seconds}
+                        </div>
+                        <div className="text-xs text-stone-500">Seconds</div>
+                      </div>
+                    </div>
+                  )}
+                  <div className="text-center mt-3">
+                    <p className="text-xs text-stone-500">
+                      Target: {TOKEN_INFO.unlockDate}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -81,7 +157,7 @@ export default function Tokenomics() {
 
           {/* Token Distribution */}
           <Card className="bg-white border-orange-200 hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
+            <CardHeader className="pb-4">
               <CardTitle className="text-lg font-semibold text-stone-800">
                 Token Distribution
               </CardTitle>
@@ -89,7 +165,7 @@ export default function Tokenomics() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <div className="flex justify-between items-center mb-1">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-1">
                     <span className="text-sm font-medium text-stone-800">
                       Team (30%)
                     </span>
@@ -104,7 +180,7 @@ export default function Tokenomics() {
                     ></div>
                   </div>
 
-                  <div className="ml-4 space-y-3 border-l-2 border-orange-200 pl-4">
+                  <div className="ml-2 md:ml-4 space-y-3 border-l-2 border-orange-200 pl-3 md:pl-4">
                     <div>
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-stone-600">
@@ -114,7 +190,7 @@ export default function Tokenomics() {
                           20%
                         </span>
                       </div>
-                      <p className="text-xs text-stone-500 mt-1">
+                      <p className="text-xs text-stone-500 mt-1 leading-relaxed">
                         For team building and product development
                       </p>
                       <div className="w-full bg-orange-100 rounded-full h-2 mt-2">
@@ -132,7 +208,7 @@ export default function Tokenomics() {
                           10%
                         </span>
                       </div>
-                      <p className="text-xs text-stone-500 mt-1">
+                      <p className="text-xs text-stone-500 mt-1 leading-relaxed">
                         Multi-phase airdrops to reward creators and fans
                       </p>
                       <div className="w-full bg-orange-100 rounded-full h-2 mt-2">

@@ -2,14 +2,14 @@ export const SOCIAL_LINKS = {
   twitter: "https://x.com/OnlyCastDotFun",
   telegram: "https://t.me/onlycast",
   farcaster: "https://farcaster.xyz/onlycastdotfun",
-}
+};
 
 export const APP_LINKS = {
   webApp: "https://onlycast.fun",
   farcasterMiniApp: "https://farcaster.xyz/miniapps/_bxBJ-3ejVc8/onlycast",
   documentation:
     "https://www.notion.so/OnlyCast-An-experiment-in-helping-users-monetize-all-digital-assets-by-social-token-20b29c1f60fa807d813fc78bce55fcf0",
-}
+};
 
 export const ECOSYSTEM_PARTNERS = [
   {
@@ -32,13 +32,13 @@ export const ECOSYSTEM_PARTNERS = [
     url: "https://arweave.org/",
     logo: "/arweave.svg",
   },
-]
+];
 
 export const TOKEN_INFO = {
   contractAddress: "0x5DDD2567e0142247ca97Bf81E97ccb23BE8e1B07",
   unlockDate: "2025/7/8",
-}
+};
 
 export const BRAND_ASSETS = {
   logo: "https://onlycast.fun/logo.png",
-}
+};
