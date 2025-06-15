@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-export const inter = Inter({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-inter",
 });
 
-export const montserrat = Montserrat({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  variable: "--font-montserrat",
 });
 
 const title = "OnlyCast - Social Token Revolution";
@@ -50,7 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${montserrat.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>
