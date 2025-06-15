@@ -4,16 +4,12 @@ import "./globals.css";
 
 export const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-inter",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const montserrat = Montserrat({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-montserrat",
-  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const title = "OnlyCast - Social Token Revolution";
