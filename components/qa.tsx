@@ -29,11 +29,12 @@ export default function QA() {
     {
       question: "How do users benefit from OnlyCast?",
       answers: [
-        `We issue coins for users based on clanker, and the user's revenue model is completely based on clanker's protocol; a. For each transaction of the user's token, the user gets 7% of the transaction's commission, clanker's protocol gets 2% of the transaction's commission, and OnlyCast gets 1/1000 of the transaction's commission.`,
+        `We issue coins for users based on clanker, and the user's revenue model is completely based on clanker's protocol; `,
+        `a. For each transaction of the user's token, the user gets 7% of the transaction's commission, clanker's protocol gets 2% of the transaction's commission, and OnlyCast gets 1/1000 of the transaction's commission.`,
 
-        `When creating a token, you can choose to hold a position and lock a certain amount of your own currency, such as holding a position of 10% and locking the position for 30 days. At this time the position is 0 cost.`,
+        `b. When creating a token, you can choose to hold a position and lock a certain amount of your own currency, such as holding a position of 10% and locking the position for 30 days. At this time the position is 0 cost.`,
 
-        `The price of any token fluctuates, you can buy a certain amount of your own tokens when the price is low. Creators buying their own code will also increase the trust of the token and give other holders more confidence in the token.`,
+        `c. The price of any token fluctuates, you can buy a certain amount of your own tokens when the price is low. Creators buying their own code will also increase the trust of the token and give other holders more confidence in the token.`,
       ],
     },
     {
