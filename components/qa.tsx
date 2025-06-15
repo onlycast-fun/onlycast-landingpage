@@ -64,7 +64,7 @@ export default function QA() {
               value={`item-${index}`}
               className="bg-white border border-orange-200 rounded-lg px-6"
             >
-              <AccordionTrigger className="text-left text-xl font-semibold text-stone-800 hover:text-orange-600 cursor-pointer">
+              <AccordionTrigger className="text-left text-md max-sm:text-base font-semibold text-stone-800 hover:text-orange-600 cursor-pointer">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-stone-700">
@@ -72,7 +72,7 @@ export default function QA() {
                   {faq.answers.map((answer, answerIndex) => (
                     <li
                       key={answerIndex}
-                      className="text-stone-700 leading-relaxed text-lg"
+                      className="text-stone-700 leading-relaxed text-md max-sm:text-base"
                     >
                       {answer}
                     </li>
