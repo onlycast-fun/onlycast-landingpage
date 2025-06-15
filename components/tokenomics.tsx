@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Copy, Check, Clock } from "lucide-react";
 import { TOKEN_INFO } from "@/lib/constants";
+import Link from "next/link";
+import {
+  dexIcons,
+  getBaseTokenClankerUrl,
+  getBaseTokenDexscreenerUrl,
+  getBaseTokenGeckoUrl,
+} from "@/lib/utils";
 
 export default function Tokenomics() {
   const [copiedAddress, setCopiedAddress] = useState(false);
@@ -79,13 +86,51 @@ export default function Tokenomics() {
             </CardHeader>
             <CardContent className="space-y-4 md:space-y-6">
               <div>
-                <h4 className="text-sm font-medium text-stone-600 mb-2">
-                  Contract Address
+                <h4 className="text-sm font-medium text-stone-600 mb-2 flex items-center justify-between">
+                  <span>Contract Address</span>
                 </h4>
                 <div className="flex items-center justify-between bg-orange-50 p-3 rounded-lg min-h-[44px]">
                   <span className="text-xs sm:text-sm text-stone-600 font-mono truncate pr-2 flex-1 leading-relaxed">
                     {TOKEN_INFO.contractAddress}
                   </span>
+                  <div className="flex items-center gap-4 mr-1">
+                    <Link
+                      href={getBaseTokenClankerUrl(TOKEN_INFO.contractAddress)}
+                      target="_blank"
+                      className=" inline-block rounded-full p-1 border hover:bg-orange-100 transition-colors duration-200"
+                    >
+                      <img
+                        src={dexIcons.clanker}
+                        alt="clanker"
+                        className="w-3 h-3 rounded-full"
+                      />
+                    </Link>
+
+                    <Link
+                      href={getBaseTokenGeckoUrl(TOKEN_INFO.contractAddress)}
+                      target="_blank"
+                      className=" inline-block rounded-full p-1 border hover:bg-orange-100 transition-colors duration-200"
+                    >
+                      <img
+                        src={dexIcons.gecko}
+                        alt="Gecko Terminal"
+                        className="w-3 h-3 rounded-full"
+                      />
+                    </Link>
+                    <Link
+                      href={getBaseTokenDexscreenerUrl(
+                        TOKEN_INFO.contractAddress
+                      )}
+                      target="_blank"
+                      className=" inline-block rounded-full p-1 border hover:bg-orange-100 transition-colors duration-200"
+                    >
+                      <img
+                        src={dexIcons.dexscreener}
+                        alt="Dexscreener"
+                        className="w-3 h-3 rounded-full"
+                      />
+                    </Link>
+                  </div>
                   <Button
                     size="sm"
                     variant="ghost"
